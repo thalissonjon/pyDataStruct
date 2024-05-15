@@ -1,4 +1,5 @@
-from queue import Queue
+# Depth-First Search algorithm
+from stack import Stack
 
 graph1 = {
   '5' : ['3','7'],
@@ -42,44 +43,37 @@ graph3 = {
     'T': ['O', 'S']
 }
 
-
 discovered = set()
-queue = Queue()
-predecessors = dict()
+stack = Stack()
 
-def bfs(graph, discovered, queue, goal):
-    initial_node = queue.peek()
-    while not queue.is_empty():
-        print(queue)
-        node = queue.dequeue()
+def dfs(graph, stack, discovered, goal):
+    traveled_path = []
+    while not stack.is_empty():
+        # print(f'Stack: {stack}')
+        node = stack.pop()
+        traveled_path.append(node)
         if node == goal:
-            print('Chegamos no objetivo!')
-            # print(predecessors)
-            shortest_path = []
-            shortest_path.append(goal)
-            n = goal
-
-            while n!= initial_node: # Precisamos voltar até o caminho inicial para encontrar o melhor caminho
-                shortest_path.append(predecessors[n])
-                n = predecessors[n] # Colocando o valor da chave como próxima chave. Logo, teremos outro valor dentro da nova chave até chegar no caminho inicial.
-
-            shortest_path = shortest_path[::-1] # Inverter vetor (início > fim)
-            print(f'O caminho mais curto será: {shortest_path}')
-            
+            # print(f'Chegamos no objetivo! Caminhos descobertos {discovered}')
+            print(f'Caminho percorrido: {traveled_path}')
             return True
         else:
             for path in graph[node]:
                 if path not in discovered:
-                    queue.enqueue(path)
+                    stack.push(path)
                     discovered.add(path)
-                    predecessors[path] = node 
 
-    return False
     
+    print(f'Não foi encontrado o objetivo. Caminhos descobertos: {discovered}')
+    return False
+     
+
+
 start = input('Qual o caminho inicial? ')
-queue.enqueue(start)
+stack.push(start)
 discovered.add(start)
+dfs(graph3, stack, discovered, 'D')
 
-bfs(graph3, discovered, queue, 'G')
 
- 
+
+
+
