@@ -11,9 +11,10 @@ class PriorityQueue:
         return not self.elements
 
     def put(self, item, priority):
-        return heapq.heapqpush(self.elements, (priority, item))
+        heapq.heappush(self.elements, (priority, item))
+        return self.elements.sort()
 
     def get(self):
-        return heapq.heapqpop(self.elements)[1]
+        return heapq.heappop(self.elements)[1]
     
     
