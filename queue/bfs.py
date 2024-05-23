@@ -72,7 +72,8 @@ def bfs(graph, discovered, queue, goal, start):
                 if path not in discovered:
                     queue.enqueue(path)
                     discovered.add(path)
-                    predecessors[path] = node 
+                    predecessors[path] = node
+                    print(predecessors)
 
     return False
     
