@@ -9,12 +9,11 @@ def countingsort(arr):
             max = i
     
     # arr with range 0 to max
-    auxArr = [0] * max 
-    print(auxArr)
-    # i=0
-    # while i<=max: # <= to add element 0 
-    #     auxArr.append(0)
-    #     i+=1
+    auxArr = []
+    i=0
+    while i<=max: # <= to add element 0 
+        auxArr.append(0)
+        i+=1
     
     # element count
     for i in arr:
@@ -23,11 +22,12 @@ def countingsort(arr):
     # sum to next
     lastNumber = 0
     i=0
-    while i!=len(auxArr):
+    while i<len(auxArr):
         auxArr[i] += lastNumber 
         lastNumber = auxArr[i]
         i+=1
     
+    print(auxArr)
     orderedarr = [0] * len(arr)
     # print(auxArr)
 
